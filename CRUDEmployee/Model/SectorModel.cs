@@ -29,5 +29,23 @@ namespace CRUDEmployee.Model
                 return null;
             }
         }
+
+        public List<Sector> GetAllSectors()
+        {
+            try
+            {
+                using (Task_1Entities context = new Task_1Entities())
+                {
+                    List<Sector> list = new List<Sector>();
+                    list = (from x in context.Sectors select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
     }
 }

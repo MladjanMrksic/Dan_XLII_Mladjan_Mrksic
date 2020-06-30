@@ -39,6 +39,7 @@
 warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeView">
           <Key>
+            <PropertyRef Name="EmployeeID" />
             <PropertyRef Name="EmployeeName" />
             <PropertyRef Name="DateOfBirth" />
             <PropertyRef Name="IDNumber" />
@@ -46,6 +47,7 @@ warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary k
             <PropertyRef Name="Gender" />
             <PropertyRef Name="PhoneNumber" />
           </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="101" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="IDNumber" Type="nvarchar" MaxLength="9" Nullable="false" />
@@ -86,6 +88,7 @@ warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary k
           <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeView" EntityType="Self.EmployeeView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [EmployeeView].[EmployeeID] AS [EmployeeID], 
     [EmployeeView].[EmployeeName] AS [EmployeeName], 
     [EmployeeView].[DateOfBirth] AS [DateOfBirth], 
     [EmployeeView].[IDNumber] AS [IDNumber], 
@@ -170,6 +173,7 @@ warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary k
             <PropertyRef Name="JMBG" />
             <PropertyRef Name="Gender" />
             <PropertyRef Name="PhoneNumber" />
+            <PropertyRef Name="EmployeeID" />
           </Key>
           <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
@@ -180,6 +184,7 @@ warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary k
           <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Manager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -235,6 +240,7 @@ warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary k
           <EntitySetMapping Name="EmployeeViews">
             <EntityTypeMapping TypeName="Task_1Model.EmployeeView">
               <MappingFragment StoreEntitySet="EmployeeView">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />

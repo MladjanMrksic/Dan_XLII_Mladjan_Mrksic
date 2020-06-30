@@ -80,9 +80,14 @@
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\EmployeeModel.cs" />
+    <Compile Include="Model\LocationModel.cs" />
     <Compile Include="Model\SectorModel.cs" />
     <Compile Include="Sector.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\UpdateEmployeeViewModel.cs" />
+    <Compile Include="View\UpdateEmployeeView.xaml.cs">
+      <DependentUpon>UpdateEmployeeView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +113,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\UpdateEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

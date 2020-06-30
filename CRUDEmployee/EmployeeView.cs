@@ -23,5 +23,6 @@ namespace CRUDEmployee
         public string SectorName { get; set; }
         public string Address { get; set; }
         public string Manager { get; set; }
+        public int EmployeeID { get; set; }
     }
 }
