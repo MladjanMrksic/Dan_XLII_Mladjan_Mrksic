@@ -13,13 +13,20 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-          <Property Name="IDNumber" Type="nvarchar" MaxLength="9" />
+          <Property Name="IDNumber" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="JMBG" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="SectorID" Type="int" Nullable="false" />
-          <Property Name="Location" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="Manager" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Sector">
           <Key>
@@ -28,7 +35,40 @@
           <Property Name="SectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SectorName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Employees__Secto__440B1D61">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Task_1.dbo.EmployeeView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmployeeView">
+          <Key>
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="IDNumber" />
+            <PropertyRef Name="JMBG" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="101" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="IDNumber" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="JMBG" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SectorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Employees__Locat__5AEE82B9">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__Secto__59FA5E80">
           <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -42,8 +82,26 @@
         </Association>
         <EntityContainer Name="Task_1ModelStoreContainer">
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employees__Secto__440B1D61" Association="Self.FK__Employees__Secto__440B1D61">
+          <EntitySet Name="EmployeeView" EntityType="Self.EmployeeView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EmployeeView].[EmployeeName] AS [EmployeeName], 
+    [EmployeeView].[DateOfBirth] AS [DateOfBirth], 
+    [EmployeeView].[IDNumber] AS [IDNumber], 
+    [EmployeeView].[JMBG] AS [JMBG], 
+    [EmployeeView].[Gender] AS [Gender], 
+    [EmployeeView].[PhoneNumber] AS [PhoneNumber], 
+    [EmployeeView].[SectorName] AS [SectorName], 
+    [EmployeeView].[Address] AS [Address], 
+    [EmployeeView].[Manager] AS [Manager]
+    FROM [dbo].[EmployeeView] AS [EmployeeView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Employees__Locat__5AEE82B9" Association="Self.FK__Employees__Locat__5AEE82B9">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__Secto__59FA5E80" Association="Self.FK__Employees__Secto__59FA5E80">
             <End Role="Sector" EntitySet="Sector" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
@@ -60,14 +118,15 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IDNumber" Type="String" Unicode="true" FixedLength="false" MaxLength="9" />
+          <Property Name="IDNumber" Type="String" Unicode="true" FixedLength="false" MaxLength="9" Nullable="false" />
           <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SectorID" Type="Int32" Nullable="false" />
-          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Manager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sector" Relationship="Self.FK__Employees__Secto__3B75D760" FromRole="Employees" ToRole="Sector" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Task_1Model.FK__Employees__Locat__5AEE82B9" FromRole="Employee" ToRole="Location" />
         </EntityType>
         <EntityType Name="Sector">
           <Key>
@@ -96,7 +155,52 @@
             <End Role="Sector" EntitySet="Sectors" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <EntitySet Name="EmployeeViews" EntityType="Task_1Model.EmployeeView" />
+          <EntitySet Name="Locations" EntityType="Task_1Model.Location" />
+          <AssociationSet Name="FK__Employees__Locat__5AEE82B9" Association="Task_1Model.FK__Employees__Locat__5AEE82B9">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="EmployeeView">
+          <Key>
+            <PropertyRef Name="EmployeeName" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="IDNumber" />
+            <PropertyRef Name="JMBG" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IDNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="JMBG" Type="String" Nullable="false" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SectorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Task_1Model.FK__Employees__Locat__5AEE82B9" FromRole="Location" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__Employees__Locat__5AEE82B9">
+          <End Type="Task_1Model.Location" Role="Location" Multiplicity="1" />
+          <End Type="Task_1Model.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -106,6 +210,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="Task_1Model.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -115,7 +220,6 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="SectorID" ColumnName="SectorID" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Manager" ColumnName="Manager" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -125,6 +229,29 @@
               <MappingFragment StoreEntitySet="Sector">
                 <ScalarProperty Name="SectorID" ColumnName="SectorID" />
                 <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeViews">
+            <EntityTypeMapping TypeName="Task_1Model.EmployeeView">
+              <MappingFragment StoreEntitySet="EmployeeView">
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SectorName" ColumnName="SectorName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="Task_1Model.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

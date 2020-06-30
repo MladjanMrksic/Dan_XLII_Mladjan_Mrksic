@@ -27,5 +27,7 @@ namespace CRUDEmployee
     
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Sector> Sectors { get; set; }
+        public virtual DbSet<EmployeeView> EmployeeViews { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
     }
 }

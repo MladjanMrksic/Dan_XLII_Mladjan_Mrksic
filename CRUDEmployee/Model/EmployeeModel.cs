@@ -27,6 +27,24 @@ namespace CRUDEmployee.Model
             }
         }
 
+        public List<EmployeeView> GetEmployeeViews ()
+        {
+            try
+            {
+                using (Task_1Entities context = new Task_1Entities())
+                {
+                    List<EmployeeView> list = new List<EmployeeView>();
+                    list = (from x in context.EmployeeViews select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception " + ex.Message.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
         public void DeleteEmplyee(int deleteID)
         {
             try

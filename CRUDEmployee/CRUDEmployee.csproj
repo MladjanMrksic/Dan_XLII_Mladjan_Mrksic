@@ -73,6 +73,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeView.cs">
+      <DependentUpon>EmployeeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>EmployeeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\EmployeeModel.cs" />
     <Compile Include="Model\SectorModel.cs" />
     <Compile Include="Sector.cs">

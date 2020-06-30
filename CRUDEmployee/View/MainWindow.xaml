@@ -21,20 +21,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="1" Grid.Row="3" Height="auto" Width="auto">
-                <DataGrid Name="DataGridEmployees" ItemsSource="{Binding EmployeeList, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid Name="DataGridEmployees" ItemsSource="{Binding EmpViews, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding Employee, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HeadersVisibility="Column"
                       AutoGenerateColumns="False" HorizontalGridLinesBrush="Black" BorderBrush="Black" Foreground="Black"
                       FontWeight="Bold">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
-                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Full Name" Binding="{Binding EmployeeName}"/>
                         <DataGridTextColumn Header="Date of Birth" Binding="{Binding DateOfBirth}"/>
                         <DataGridTextColumn Header="ID Number" Binding="{Binding IDNumber}"/>
                         <DataGridTextColumn Header="JMBG" Binding="{Binding JMBG}"/>
                         <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"/>
                         <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}"/>
-                        <DataGridTextColumn Header="Sector" Binding="{Binding SectorID}"/>
-                        <DataGridTextColumn Header="Location" Binding="{Binding Location}"/>
+                        <DataGridTextColumn Header="Sector" Binding="{Binding SectorName}"/>
+                        <DataGridTextColumn Header="Location" Binding="{Binding Address}"/>
                         <DataGridTextColumn Header="Manager" Binding="{Binding Manager}"/>
                         
 
@@ -50,8 +49,8 @@
                         <DataGridTemplateColumn Header="Update">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Name="btnUpdateUser"
-                                        Command="{Binding DataContext.UpdateUser, RelativeSource={RelativeSource FindAncestor,
+                                    <Button Name="btnUpdateEmployee"
+                                        Command="{Binding DataContext.UpdateEmployee, RelativeSource={RelativeSource FindAncestor,
                                     AncestorType={x:Type Window}},UpdateSourceTrigger=PropertyChanged}" Content="Update"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

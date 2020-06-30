@@ -18,7 +18,7 @@ namespace CRUDEmployee.ViewModel
         public MainWindowViewModel(MainWindow mainOpen)
         {
             main = mainOpen;
-            EmployeeList = empModel.GetAllEmployees();
+            EmpViews = empModel.GetEmployeeViews();
         }
 
         private Employee employee;
@@ -48,6 +48,22 @@ namespace CRUDEmployee.ViewModel
                 OnPropertyChanged("EmployeeList");
             }
         }
+
+        private List<EmployeeView> empViews;
+
+        public List<EmployeeView> EmpViews
+        {
+            get
+            {
+                return empViews;
+            }
+            set
+            {
+                empViews = value;
+                OnPropertyChanged("EmpViews");
+            }
+        }
+
 
         private ICommand deleteEmployee;
         public ICommand DeleteEmployee
@@ -88,6 +104,8 @@ namespace CRUDEmployee.ViewModel
                 return true;
             }
         }
+
+
 
     }
 }
