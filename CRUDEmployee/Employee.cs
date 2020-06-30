@@ -18,7 +18,7 @@ namespace CRUDEmployee
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public System.DateTime DateOfBirth { get; set; }
-        public int IDNumber { get; set; }
+        public string IDNumber { get; set; }
         public string JMBG { get; set; }
         public string Gender { get; set; }
         public string PhoneNumber { get; set; }

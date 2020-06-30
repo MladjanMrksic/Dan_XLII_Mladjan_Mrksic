@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Task_1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Task_1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -13,7 +13,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-          <Property Name="IDNumber" Type="int" Nullable="false" />
+          <Property Name="IDNumber" Type="nvarchar" MaxLength="9" />
           <Property Name="JMBG" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -28,7 +28,7 @@
           <Property Name="SectorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SectorName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Employees__Secto__3B75D760">
+        <Association Name="FK__Employees__Secto__440B1D61">
           <End Role="Sector" Type="Self.Sector" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -43,13 +43,12 @@
         <EntityContainer Name="Task_1ModelStoreContainer">
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employees__Secto__3B75D760" Association="Self.FK__Employees__Secto__3B75D760">
+          <AssociationSet Name="FK__Employees__Secto__440B1D61" Association="Self.FK__Employees__Secto__440B1D61">
             <End Role="Sector" EntitySet="Sector" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Task_1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -61,7 +60,7 @@
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IDNumber" Type="Int32" Nullable="false" />
+          <Property Name="IDNumber" Type="String" Unicode="true" FixedLength="false" MaxLength="9" />
           <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
