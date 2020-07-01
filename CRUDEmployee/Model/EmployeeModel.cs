@@ -9,6 +9,7 @@ namespace CRUDEmployee.Model
 {
     class EmployeeModel
     {
+        Archive archive = new Archive();
         public List<Employee> GetAllEmployees()
         {
             try
@@ -54,6 +55,8 @@ namespace CRUDEmployee.Model
                     Employee employee = (from e in context.Employees where e.EmployeeID == deleteID select e).FirstOrDefault();
                     context.Employees.Remove(employee);
                     context.SaveChanges();
+                    string input = (DateTime.Now + " / Deleted Employee named " + employee.FirstName + " " + employee.LastName + " in sector " + employee.Sector.SectorName);
+                    archive.WriteToFile(input);
                 }
             }
             catch (Exception ex)
@@ -80,6 +83,8 @@ namespace CRUDEmployee.Model
                     EmployeeToUpdate.Location = employee.Location;
                     EmployeeToUpdate.Manager = employee.Manager;
                     context.SaveChanges();
+                    string input = (DateTime.Now + " / Updated Employee named " + EmployeeToUpdate.FirstName + " " + EmployeeToUpdate.LastName + " in sector " + EmployeeToUpdate.Sector.SectorName);
+                    archive.WriteToFile(input);
                     return employee;
                 }
             }
@@ -139,6 +144,8 @@ namespace CRUDEmployee.Model
                     newEmployee.Manager = employee.Manager;
                     context.Employees.Add(newEmployee);
                     context.SaveChanges();
+                    string input = (DateTime.Now + " / Added new Employee named " + newEmployee.FirstName + " " + newEmployee.LastName + " to sector " + newEmployee.Sector.SectorName);
+                    archive.WriteToFile(input);
                     return newEmployee;
                 }
             }

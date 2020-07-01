@@ -10,6 +10,7 @@ namespace CRUDEmployee.Model
 {
     class LocationModel
     {
+        Archive archive = new Archive();
         public List<Location> GetAllLocations()
         {
             try
@@ -62,6 +63,8 @@ namespace CRUDEmployee.Model
                 foreach (var loc in locationsToAdd)
                 {
                     context.Locations.Add(loc);
+                    string input = (DateTime.Now + " / Added new location with address " + loc.Address + " directly to database");
+                    archive.WriteToFile(input);
                     context.SaveChanges();
                 }
             }
