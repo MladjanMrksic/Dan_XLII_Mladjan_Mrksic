@@ -1,4 +1,5 @@
-﻿using CRUDEmployee.ViewModel;
+﻿using CRUDEmployee.Model;
+using CRUDEmployee.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,11 @@ namespace CRUDEmployee
     /// </summary>
     public partial class MainWindow : Window
     {
+        LocationModel locModel = new LocationModel();
         public MainWindow()
         {
             InitializeComponent();
+            locModel.LocationsToDB();
             this.DataContext = new MainWindowViewModel(this);
         }
     }

@@ -21,34 +21,7 @@ namespace CRUDEmployee.ViewModel
             main = mainOpen;
             EmpViews = empModel.GetEmployeeViews();
         }
-
-        //private Employee employee;
-        //public Employee Employee
-        //{
-        //    get
-        //    {
-        //        return employee;
-        //    }
-        //    set
-        //    {
-        //        employee = value;
-        //        OnPropertyChanged("Employee");
-        //    }
-        //}
-
-        //private List<Employee> employeeList;
-        //public List<Employee> EmployeeList
-        //{
-        //    get
-        //    {
-        //        return employeeList;
-        //    }
-        //    set
-        //    {
-        //        employeeList = value;
-        //        OnPropertyChanged("EmployeeList");
-        //    }
-        //}
+        
         private EmployeeView employee;
         public EmployeeView Employee
         {
