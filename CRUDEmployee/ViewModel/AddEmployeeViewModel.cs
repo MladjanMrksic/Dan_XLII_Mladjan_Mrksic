@@ -3,8 +3,10 @@ using CRUDEmployee.Model;
 using CRUDEmployee.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -17,6 +19,7 @@ namespace CRUDEmployee.ViewModel
         EmployeeModel empModel = new EmployeeModel();
         LocationModel locModel = new LocationModel();
         SectorModel secModel = new SectorModel();
+        BackgroundWorker bw = new BackgroundWorker();
 
         public AddEmployeeViewModel(AddEmployeeView addEmployeeOpen)
         {
@@ -28,6 +31,9 @@ namespace CRUDEmployee.ViewModel
             LocationList = locModel.GetAllLocations();
             SectorList = secModel.GetAllSectors();
             EmployeeList = empModel.GetAllEmployees();
+
+            bw.DoWork += DoWork;
+            bw.RunWorkerCompleted += WorkCompleted;
         }
 
         private Employee employee;
@@ -155,20 +161,11 @@ namespace CRUDEmployee.ViewModel
         }
         private void SaveExecute()
         {
-            try
-            {
-                Employee.DateOfBirth = empModel.JMBGCheck(Employee.JMBG);
-                Employee temp = empModel.AddEmployee(Employee);
-                addEmployeeView.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception " + ex.Message.ToString());
-            }
+            bw.RunWorkerAsync();
         }
         private bool CanSaveExecute()
         {
-            if (String.IsNullOrEmpty(employee.FirstName) || String.IsNullOrEmpty(employee.LastName) || employee.DateOfBirth > DateTime.Now || String.IsNullOrEmpty(employee.IDNumber) || String.IsNullOrEmpty(employee.JMBG) || String.IsNullOrEmpty(employee.Gender) || String.IsNullOrEmpty(employee.PhoneNumber) || String.IsNullOrEmpty(employee.Sector.SectorName) || String.IsNullOrEmpty(employee.Location.Address) || String.IsNullOrEmpty(employee.Manager))
+            if (String.IsNullOrEmpty(employee.FirstName) || String.IsNullOrEmpty(employee.LastName) || employee.DateOfBirth > DateTime.Now || String.IsNullOrEmpty(employee.IDNumber) || String.IsNullOrEmpty(employee.JMBG) || String.IsNullOrEmpty(employee.Gender) || String.IsNullOrEmpty(employee.PhoneNumber) ||employee.SectorID > 0|| employee.LocationID > 0|| String.IsNullOrEmpty(employee.Manager))
             {
                 return false;
             }
@@ -204,6 +201,33 @@ namespace CRUDEmployee.ViewModel
         private bool CanCloseExecute()
         {
             return true;
+        }
+
+        void DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                Employee.DateOfBirth = empModel.JMBGCheck(Employee.JMBG);
+                Employee temp = empModel.AddEmployee(Employee);
+                addEmployeeView.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception " + ex.Message.ToString());
+            }
+            Thread.Sleep(2000);
+        }
+
+        void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Error " + e.Error.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("Completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

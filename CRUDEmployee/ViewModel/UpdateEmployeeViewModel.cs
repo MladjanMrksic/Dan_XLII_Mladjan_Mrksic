@@ -3,8 +3,10 @@ using CRUDEmployee.Model;
 using CRUDEmployee.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -17,6 +19,7 @@ namespace CRUDEmployee.ViewModel
         EmployeeModel empModel = new EmployeeModel();
         LocationModel locModel = new LocationModel();
         SectorModel secModel = new SectorModel();
+        BackgroundWorker bw = new BackgroundWorker();
 
         public UpdateEmployeeViewModel(UpdateEmployeeView updateEmployeeOpen, Employee updateEmployee)
         {
@@ -28,6 +31,9 @@ namespace CRUDEmployee.ViewModel
             EmployeeList = empModel.GetAllEmployees();
             location = updateEmployee.Location;
             sector = updateEmployee.Sector;
+
+            bw.DoWork += DoWork;
+            bw.RunWorkerCompleted += WorkCompleted;
         }
 
         private Employee employee;
@@ -155,21 +161,7 @@ namespace CRUDEmployee.ViewModel
         }
         private void SaveExecute()
         {
-            try
-            {
-
-                Employee.LocationID = Location.LocationID;
-                Employee.SectorID = Sector.SectorID;
-                Employee.Manager = employeeManager.FirstName;
-                Employee.DateOfBirth = empModel.JMBGCheck(Employee.JMBG);
-                empModel.UpdateEmployee(Employee);
-                isUpdateEmployee = true;
-                updateEmployeeView.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception " + ex.Message.ToString());
-            }
+            bw.RunWorkerAsync();
         }
         private bool CanSaveExecute()
         {
@@ -211,5 +203,35 @@ namespace CRUDEmployee.ViewModel
             return true;
         }
 
+        void DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+
+                Employee.LocationID = Location.LocationID;
+                Employee.SectorID = Sector.SectorID;
+                Employee.Manager = employeeManager.FirstName;
+                Employee.DateOfBirth = empModel.JMBGCheck(Employee.JMBG);
+                empModel.UpdateEmployee(Employee);
+                isUpdateEmployee = true;
+                updateEmployeeView.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception " + ex.Message.ToString());
+            }
+            Thread.Sleep(2000);
+        }
+        void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Error " + e.Error.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("Completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }

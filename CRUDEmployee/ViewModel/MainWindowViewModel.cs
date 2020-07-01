@@ -3,8 +3,10 @@ using CRUDEmployee.Model;
 using CRUDEmployee.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -15,11 +17,14 @@ namespace CRUDEmployee.ViewModel
     {
         MainWindow main;
         EmployeeModel empModel = new EmployeeModel();
+        BackgroundWorker bw = new BackgroundWorker();
 
         public MainWindowViewModel(MainWindow mainOpen)
         {
             main = mainOpen;
             EmpViews = empModel.GetEmployeeViews();
+            bw.DoWork += DoWork;
+            bw.RunWorkerCompleted += WorkCompleted;
         }
         
         private EmployeeView employee;
@@ -65,19 +70,7 @@ namespace CRUDEmployee.ViewModel
         }
         private void DeleteEmployeeExecute()
         {
-            try
-            {
-                if (Employee != null)
-                {
-                    int employeeID = employee.EmployeeID;
-                    empModel.DeleteEmplyee(employeeID);
-                    EmpViews = empModel.GetEmployeeViews().ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            bw.RunWorkerAsync();
         }
         private bool CanDeleteEmployeeExecute()
         {
@@ -159,5 +152,33 @@ namespace CRUDEmployee.ViewModel
             return true;
         }
 
+        void DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                if (Employee != null)
+                {
+                    int employeeID = employee.EmployeeID;
+                    empModel.DeleteEmplyee(employeeID);
+                    EmpViews = empModel.GetEmployeeViews().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            Thread.Sleep(2000);
+        }
+        void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Error " + e.Error.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("Completed!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }

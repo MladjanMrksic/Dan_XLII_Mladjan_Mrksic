@@ -68,9 +68,9 @@
         </ComboBox>
         <TextBox Grid.Column="3" Grid.Row="13" Width="auto" Height="20" Name="txtPhoneNumber" Text="{Binding Employee.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Text="{Binding Employee.Sector.SectorName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="15" Width="auto" Height="20" Name="cmbSector" DisplayMemberPath="SectorName" IsEditable="True" ItemsSource="{Binding SectorList, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedItem="{Binding Sector, UpdateSourceTrigger=PropertyChanged}"/>
+                  SelectedItem="{Binding Employee.Sector, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Text="{Binding Employee.Location.Address, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="17" Width="auto" Height="20" Name="cmbLocation" DisplayMemberPath="Address" IsEditable="True" ItemsSource="{Binding LocationList, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedItem="{Binding Location, UpdateSourceTrigger=PropertyChanged}"/>
+                  SelectedItem="{Binding Employee.Location, UpdateSourceTrigger=PropertyChanged}"/>
         <ComboBox Text="{Binding Employee.Manager, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="19" Width="auto" Height="20" Name="cmbManager" DisplayMemberPath="FirstName" IsEditable="True" ItemsSource="{Binding EmployeeList, UpdateSourceTrigger=PropertyChanged}" 
                   SelectedItem="{Binding EmployeeManager, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
