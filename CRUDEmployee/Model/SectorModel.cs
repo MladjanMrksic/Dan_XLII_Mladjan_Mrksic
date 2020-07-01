@@ -30,6 +30,10 @@ namespace CRUDEmployee.Model
             }
         }
 
+        /// <summary>
+        /// This method gets all the sectors from database and adds them to a list
+        /// </summary>
+        /// <returns>A list of all sectors in DataBase</returns>
         public List<Sector> GetAllSectors()
         {
             try

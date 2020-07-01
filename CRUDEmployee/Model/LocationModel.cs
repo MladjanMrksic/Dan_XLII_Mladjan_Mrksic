@@ -9,6 +9,10 @@ namespace CRUDEmployee.Model
     class LocationModel
     {
         Archive archive = new Archive();
+        /// <summary>
+        /// This method gets all the locations from database and adds them to a list
+        /// </summary>
+        /// <returns>A list of all locations in DataBase</returns>
         public List<Location> GetAllLocations()
         {
             try
@@ -26,6 +30,10 @@ namespace CRUDEmployee.Model
                 return null;
             }
         }
+        /// <summary>
+        /// Adds new location to database
+        /// </summary>
+        /// <param name="L">A location that is to be added</param>
         public void AddLocation (Location L)
         {
             try

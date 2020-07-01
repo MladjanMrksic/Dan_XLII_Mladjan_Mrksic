@@ -9,6 +9,10 @@ namespace CRUDEmployee.Model
     class EmployeeModel
     {
         Archive archive = new Archive();
+        /// <summary>
+        /// This method gets all the employees from database and adds them to a list
+        /// </summary>
+        /// <returns>A list of all employees in DataBase</returns>
         public List<Employee> GetAllEmployees()
         {
             try
@@ -26,7 +30,10 @@ namespace CRUDEmployee.Model
                 return null;
             }
         }
-
+        /// <summary>
+        /// This method gets all the employees from view and adds them to a list
+        /// </summary>
+        /// <returns>A list of all employees in view</returns>
         public List<EmployeeView> GetEmployeeViews ()
         {
             try
@@ -44,7 +51,10 @@ namespace CRUDEmployee.Model
                 return null;
             }
         }
-
+        /// <summary>
+        /// This method deletes an employee from the database
+        /// </summary>
+        /// <param name="deleteID">ID of employee that is to be deleted</param>
         public void DeleteEmplyee(int deleteID)
         {
             try
@@ -63,7 +73,11 @@ namespace CRUDEmployee.Model
                 MessageBox.Show("Exception " + ex.Message.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        /// <summary>
+        /// This method updates an employee from the database
+        /// </summary>
+        /// <param name="employee">Employee that is to be updated</param>
+        /// <returns>A updated employee</returns>
         public Employee UpdateEmployee(Employee employee)
         {
             try
@@ -93,7 +107,11 @@ namespace CRUDEmployee.Model
                 return null;
             }
         }
-
+        /// <summary>
+        /// A method that parses JMBG to Date of birth
+        /// </summary>
+        /// <param name="JMBG">JMBG of an employee</param>
+        /// <returns>Date of Birth</returns>
         public DateTime JMBGCheck(string JMBG)
         {
             try
@@ -123,7 +141,11 @@ namespace CRUDEmployee.Model
                 return DateTime.MinValue;
             }
         }
-
+        /// <summary>
+        /// Adds and employee to the database
+        /// </summary>
+        /// <param name="employee">Employee to be added to the database</param>
+        /// <returns>An employee that was added to the database</returns>
         public Employee AddEmployee(Employee employee)
         {
             try
