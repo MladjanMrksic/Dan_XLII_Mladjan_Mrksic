@@ -87,7 +87,6 @@
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddEmployeeViewModel.cs" />
-    <Compile Include="ViewModel\BackroundWorker.cs" />
     <Compile Include="ViewModel\UpdateEmployeeViewModel.cs" />
     <Compile Include="View\AddEmployeeView.xaml.cs">
       <DependentUpon>AddEmployeeView.xaml</DependentUpon>

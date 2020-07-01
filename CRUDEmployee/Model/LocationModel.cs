@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CRUDEmployee.Model
@@ -49,6 +47,8 @@ namespace CRUDEmployee.Model
             List<Location> existingLocations = GetAllLocations();
             List<Location> newLocations = new List<Location>();
             StreamReader sr = new StreamReader(@".../.../Locations.txt");
+            if (!File.Exists(@".../.../Locations.txt"))
+                File.Create(@".../.../Locations.txt").Close();
             string line;
             while ((line = sr.ReadLine()) != null)
             {

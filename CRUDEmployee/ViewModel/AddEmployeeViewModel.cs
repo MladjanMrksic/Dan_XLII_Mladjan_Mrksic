@@ -4,10 +4,7 @@ using CRUDEmployee.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -217,7 +214,6 @@ namespace CRUDEmployee.ViewModel
             }
             Thread.Sleep(2000);
         }
-
         void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)

@@ -1,19 +1,6 @@
 ﻿using CRUDEmployee.Model;
 using CRUDEmployee.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CRUDEmployee
 {
@@ -22,11 +9,16 @@ namespace CRUDEmployee
     /// </summary>
     public partial class MainWindow : Window
     {
+        EmployeeModel emp = new EmployeeModel();
         LocationModel locModel = new LocationModel();
+        SectorModel secModel  = new SectorModel();
+        EmployeeModel empMode = new EmployeeModel();
         public MainWindow()
         {
             InitializeComponent();
             locModel.LocationsToDB();
+            secModel.SectorsToDB();
+            empMode.EmployeesToDB();
             this.DataContext = new MainWindowViewModel(this);
         }
     }

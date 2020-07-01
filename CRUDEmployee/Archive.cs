@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace CRUDEmployee
 {
-
     /// <summary>
     /// Class Archive writes all actions to text file
     /// </summary>

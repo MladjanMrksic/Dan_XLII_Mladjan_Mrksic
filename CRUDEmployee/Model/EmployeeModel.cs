@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CRUDEmployee.Model
@@ -155,5 +154,43 @@ namespace CRUDEmployee.Model
                 return null;
             }
         }
+
+        public void EmployeesToDB()
+        {
+            List<Employee> existingEmployees = GetAllEmployees();
+            List<Employee> newEmployees = new List<Employee>();
+            StreamReader sr = new StreamReader(@".../.../Employees.txt");
+            if (!File.Exists(@".../.../Employees.txt"))
+                File.Create(@".../.../Employees.txt").Close();
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                string[] employeeData = line.Split(',');
+                Employee e = new Employee();
+                e.FirstName = employeeData[0];
+                e.LastName = employeeData[1];
+                e.DateOfBirth = Convert.ToDateTime(employeeData[2]);
+                e.IDNumber = employeeData[3];
+                e.JMBG = employeeData[4];
+                e.Gender = employeeData[5];
+                e.PhoneNumber = employeeData[6];
+                e.SectorID = Convert.ToInt32(employeeData[7]);
+                e.LocationID = Convert.ToInt32(employeeData[8]);
+                e.Manager = employeeData[9];
+                newEmployees.Add(e);
+            }
+            var employeesToAdd = newEmployees.Where(e => existingEmployees.All(e2 => e2.JMBG != e.JMBG));
+            using (Task_1Entities context = new Task_1Entities())
+            {
+                foreach (var emp in employeesToAdd)
+                {
+                    context.Employees.Add(emp);
+                    string input = (DateTime.Now + " / Added new Employee with name " + emp.FirstName + " " + emp.LastName + " directly to database");
+                    archive.WriteToFile(input);
+                    context.SaveChanges();
+                }
+            }
+        }
+
     }
 }

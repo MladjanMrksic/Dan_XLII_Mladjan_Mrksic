@@ -1,0 +1,45 @@
+01-Jul-20 12:37:44 / Added new location with address Bačka Palanka directly to database
+01-Jul-20 12:37:45 / Added new location with address Beograd directly to database
+01-Jul-20 12:37:45 / Added new location with address Čačak directly to database
+01-Jul-20 12:37:45 / Added new location with address Jagodina directly to database
+01-Jul-20 12:37:45 / Added new location with address Kikinda directly to database
+01-Jul-20 12:37:45 / Added new location with address Kragujevac directly to database
+01-Jul-20 12:37:45 / Added new location with address Kraljevo directly to database
+01-Jul-20 12:37:45 / Added new location with address Kruševac directly to database
+01-Jul-20 12:37:45 / Added new location with address Leskovac directly to database
+01-Jul-20 12:37:45 / Added new location with address Loznica directly to database
+01-Jul-20 12:37:45 / Added new location with address Niš directly to database
+01-Jul-20 12:37:45 / Added new location with address Novi Pazar directly to database
+01-Jul-20 12:37:45 / Added new location with address Novi Sad directly to database
+01-Jul-20 12:37:45 / Added new location with address Pančevo directly to database
+01-Jul-20 12:37:45 / Added new location with address Paraćin directly to database
+01-Jul-20 12:37:45 / Added new location with address Pirot directly to database
+01-Jul-20 12:37:45 / Added new location with address Požarevac directly to database
+01-Jul-20 12:37:45 / Added new location with address Ruma directly to database
+01-Jul-20 12:37:45 / Added new location with address Šabac directly to database
+01-Jul-20 12:37:45 / Added new location with address Smederevo directly to database
+01-Jul-20 12:37:45 / Added new location with address Sombor directly to database
+01-Jul-20 12:37:45 / Added new location with address Sremska Mitrovica directly to database
+01-Jul-20 12:37:45 / Added new location with address Stara Pazova directly to database
+01-Jul-20 12:37:45 / Added new location with address Subotica directly to database
+01-Jul-20 12:37:45 / Added new location with address Užice directly to database
+01-Jul-20 12:37:45 / Added new location with address Valjevo directly to database
+01-Jul-20 12:37:45 / Added new location with address Vranje directly to database
+01-Jul-20 12:37:45 / Added new location with address Vršac directly to database
+01-Jul-20 12:37:45 / Added new location with address Zaječar directly to database
+01-Jul-20 12:37:45 / Added new location with address Zrenjanin directly to database
+01-Jul-20 12:37:45 / Added new location with address Human Resources directly to database
+01-Jul-20 12:37:45 / Added new location with address Reasearch & Development directly to database
+01-Jul-20 12:37:45 / Added new location with address Finance directly to database
+01-Jul-20 12:37:45 / Added new location with address Accounting directly to database
+01-Jul-20 12:37:45 / Added new location with address Transportation directly to database
+01-Jul-20 12:37:45 / Added new location with address Maintenance directly to database
+01-Jul-20 12:37:45 / Added new location with address Information Technology directly to database
+01-Jul-20 12:37:45 / Added new location with address Energy directly to database
+01-Jul-20 12:37:45 / Added new location with address Education directly to database
+01-Jul-20 12:37:45 / Added new location with address Marketing directly to database
+01-Jul-20 12:37:45 / Added new Employee with name Bill Gates directly to database
+01-Jul-20 12:37:45 / Added new Employee with name Steve Jobs directly to database
+01-Jul-20 12:37:45 / Added new Employee with name Steve Wozniak directly to database
+01-Jul-20 12:37:45 / Added new Employee with name Jade Raymond directly to database
+01-Jul-20 12:37:45 / Added new Employee with name Corrinne Yu directly to database
