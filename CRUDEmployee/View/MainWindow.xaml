@@ -59,8 +59,8 @@
                 </DataGrid>
             </Grid>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-                <Button Name="btnAddLocation" Content="Add Location" Width="Auto" Height="20" HorizontalAlignment="Left" Margin="0,0,20,0"
-                Command="{Binding AddNewLocation, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                <Button Name="btnAddEmployee" Content="Add Employee" Width="Auto" Height="20" HorizontalAlignment="Left" Margin="0,0,20,0"
+                Command="{Binding AddNewEmployee, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
             </StackPanel>
         </Grid>
     </Grid>

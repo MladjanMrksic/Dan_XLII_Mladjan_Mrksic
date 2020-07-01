@@ -62,13 +62,13 @@ namespace CRUDEmployee.Model
             }
         }
 
-        public Employee UpdateEmplyee(Employee employee)
+        public Employee UpdateEmployee(Employee employee)
         {
             try
             {
                 using (Task_1Entities context = new Task_1Entities())
                 {
-                    Employee EmployeeToUpdate = (from e in context.Employees where e.EmployeeID == employee.EmployeeID select e).FirstOrDefault();
+                    Employee EmployeeToUpdate = (from e in context.Employees where e.EmployeeID == employee.EmployeeID select e).First();
                     EmployeeToUpdate.FirstName = employee.FirstName;
                     EmployeeToUpdate.LastName = employee.LastName;
                     EmployeeToUpdate.DateOfBirth = employee.DateOfBirth;

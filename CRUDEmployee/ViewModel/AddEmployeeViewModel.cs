@@ -11,23 +11,23 @@ using System.Windows.Input;
 
 namespace CRUDEmployee.ViewModel
 {
-    class UpdateEmployeeViewModel : ViewModelBase
+    class AddEmployeeViewModel : ViewModelBase
     {
-        UpdateEmployeeView updateEmployeeView;
+        AddEmployeeView addEmployeeView;
         EmployeeModel empModel = new EmployeeModel();
         LocationModel locModel = new LocationModel();
         SectorModel secModel = new SectorModel();
 
-        public UpdateEmployeeViewModel(UpdateEmployeeView updateEmployeeOpen, Employee updateEmployee)
+        public AddEmployeeViewModel(AddEmployeeView addEmployeeOpen)
         {
-            employee = updateEmployee;
-            updateEmployeeView = updateEmployeeOpen;
+            employee = new Employee();
+            location = new Location();
+            sector = new Sector();
+            addEmployeeView = addEmployeeOpen;
 
             LocationList = locModel.GetAllLocations();
             SectorList = secModel.GetAllSectors();
             EmployeeList = empModel.GetAllEmployees();
-            location = updateEmployee.Location;
-            sector = updateEmployee.Sector;
         }
 
         private Employee employee;
@@ -41,6 +41,34 @@ namespace CRUDEmployee.ViewModel
             {
                 employee = value;
                 OnPropertyChanged("Employee");
+            }
+        }
+
+        private Location location;
+        public Location Location
+        {
+            get
+            {
+                return location;
+            }
+            set
+            {
+                location = value;
+                OnPropertyChanged("Location");
+            }
+        }
+
+        private Sector sector;
+        public Sector Sector
+        {
+            get
+            {
+                return sector;
+            }
+            set
+            {
+                sector = value;
+                OnPropertyChanged("Sector");
             }
         }
 
@@ -98,34 +126,6 @@ namespace CRUDEmployee.ViewModel
                 employeeList = value;
                 OnPropertyChanged("SectorList");
             }
-        } 
-
-        private Location location;
-        public Location Location
-        {
-            get
-            {
-                return location;
-            }
-            set
-            {
-                location = value;
-                OnPropertyChanged("Location");
-            }
-        }
-
-        private Sector sector;
-        public Sector Sector
-        {
-            get
-            {
-                return sector;
-            }
-            set
-            {
-                sector = value;
-                OnPropertyChanged("Sector");
-            }
         }
 
         private bool isUpdateEmployee;
@@ -157,14 +157,9 @@ namespace CRUDEmployee.ViewModel
         {
             try
             {
-
-                Employee.LocationID = Location.LocationID;
-                Employee.SectorID = Sector.SectorID;
-                Employee.Manager = employeeManager.FirstName;
                 Employee.DateOfBirth = empModel.JMBGCheck(Employee.JMBG);
-                empModel.UpdateEmployee(Employee);
-                isUpdateEmployee = true;
-                updateEmployeeView.Close();
+                Employee temp = empModel.AddEmployee(Employee);
+                addEmployeeView.Close();
             }
             catch (Exception ex)
             {
@@ -173,7 +168,7 @@ namespace CRUDEmployee.ViewModel
         }
         private bool CanSaveExecute()
         {
-            if (String.IsNullOrEmpty(employee.FirstName) || String.IsNullOrEmpty(employee.LastName) || employee.DateOfBirth>DateTime.Now || String.IsNullOrEmpty(employee.IDNumber) || String.IsNullOrEmpty(employee.JMBG) || String.IsNullOrEmpty(employee.Gender) || String.IsNullOrEmpty(employee.PhoneNumber) || String.IsNullOrEmpty(employee.Sector.SectorName) || String.IsNullOrEmpty(employee.Location.Address) || String.IsNullOrEmpty(employee.Manager))
+            if (String.IsNullOrEmpty(employee.FirstName) || String.IsNullOrEmpty(employee.LastName) || employee.DateOfBirth > DateTime.Now || String.IsNullOrEmpty(employee.IDNumber) || String.IsNullOrEmpty(employee.JMBG) || String.IsNullOrEmpty(employee.Gender) || String.IsNullOrEmpty(employee.PhoneNumber) || String.IsNullOrEmpty(employee.Sector.SectorName) || String.IsNullOrEmpty(employee.Location.Address) || String.IsNullOrEmpty(employee.Manager))
             {
                 return false;
             }
@@ -199,7 +194,7 @@ namespace CRUDEmployee.ViewModel
         {
             try
             {
-                updateEmployeeView.Close();
+                addEmployeeView.Close();
             }
             catch (Exception ex)
             {
@@ -210,6 +205,5 @@ namespace CRUDEmployee.ViewModel
         {
             return true;
         }
-
     }
 }

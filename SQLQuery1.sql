@@ -48,7 +48,7 @@ Use Task_1
 go
 
 CREATE VIEW EmployeeView
-AS SELECT e.FirstName+' '+e.LastName as EmployeeName, e.DateOfBirth, e.IDNumber, e.JMBG, e.Gender, e.PhoneNumber, s.SectorName, l.Address,e.Manager
+AS SELECT e.EmployeeID,e.FirstName+' '+e.LastName as EmployeeName, e.DateOfBirth, e.IDNumber, e.JMBG, e.Gender, e.PhoneNumber, s.SectorName, l.Address,e.Manager
 FROM Employees e, Sector s, Location l
 WHERE e.SectorID = s.SectorID
 AND e.LocationID = l.LocationID;

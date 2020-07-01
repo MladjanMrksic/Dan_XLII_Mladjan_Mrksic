@@ -156,5 +156,35 @@ namespace CRUDEmployee.ViewModel
             return true;
         }
 
+        private ICommand addNewEmployee;
+        public ICommand AddNewEmployee
+        {
+            get
+            {
+                if (addNewEmployee == null)
+                {
+                    addNewEmployee = new RelayCommand(param => AddNewEmployeeExecute(), param => CanAddNewEmployeeExecute());
+                }
+                return addNewEmployee;
+            }
+        }
+        private void AddNewEmployeeExecute()
+        {
+            try
+            {
+                AddEmployeeView addEmployee = new AddEmployeeView();
+                addEmployee.ShowDialog();
+                EmpViews = empModel.GetEmployeeViews().ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception " + ex.Message.ToString());
+            }
+        }
+        private bool CanAddNewEmployeeExecute()
+        {
+            return true;
+        }
+
     }
 }
